@@ -4,6 +4,7 @@ import com.joao.CRUD_Simples.Domain.product.Product;
 import com.joao.CRUD_Simples.Domain.product.ProductPostDTO;
 import com.joao.CRUD_Simples.Domain.product.ProductPutDTO;
 import com.joao.CRUD_Simples.Domain.product.ProductRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -50,7 +51,7 @@ public class ProductController {
 
             return ResponseEntity.ok(data);
         }
-        return ResponseEntity.badRequest().body("Não foi possível atualizar o produto");
+        throw new EntityNotFoundException();
     }
 
     @DeleteMapping("/{id}")
@@ -64,7 +65,7 @@ public class ProductController {
 
             return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.badRequest().body("Não foi possível deletar o produto");
+        throw new EntityNotFoundException();
     }
 
 }
