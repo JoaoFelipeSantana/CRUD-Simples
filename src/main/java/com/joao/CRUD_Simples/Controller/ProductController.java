@@ -21,7 +21,7 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity getAllProduct() {
-        var allProducts = repository.findAll();
+        var allProducts = repository.findAllByActiveTrue();
         return ResponseEntity.ok(allProducts);
     }
 
