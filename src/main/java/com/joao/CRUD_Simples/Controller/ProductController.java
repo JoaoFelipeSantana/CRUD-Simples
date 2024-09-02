@@ -1,14 +1,17 @@
 package com.joao.CRUD_Simples.Controller;
 
 import com.joao.CRUD_Simples.Domain.product.Product;
-import com.joao.CRUD_Simples.Domain.product.ProductDTO;
+import com.joao.CRUD_Simples.Domain.product.ProductPostDTO;
+import com.joao.CRUD_Simples.Domain.product.ProductPutDTO;
 import com.joao.CRUD_Simples.Domain.product.ProductRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
-import java.time.format.DateTimeFormatter;
+import java.text.SimpleDateFormat;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/produtos")
@@ -23,9 +26,31 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity registerProduct(@RequestBody ProductDTO data) throws ParseException {
+    public ResponseEntity registerProduct(@RequestBody ProductPostDTO data) throws ParseException {
         Product newProduct = new Product(data);
         repository.save(newProduct);
         return ResponseEntity.ok().build();
     }
+
+    @PutMapping
+    @Transactional
+    public ResponseEntity updateProduct(@RequestBody ProductPutDTO data) throws ParseException {
+        Optional<Product> optionalProduct = repository.findById(data.id());
+
+        if (optionalProduct.isPresent()) {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+            Product product = optionalProduct.get();
+
+            product.setName(data.name());
+            product.setSupplier(data.supplier());
+            product.setDt_validity(format.parse(data.dt_validity()));
+            product.setDt_manufacture(format.parse(data.dt_manufacture()));
+            product.setAmount(data.amount());
+
+            return ResponseEntity.ok(data);
+        }
+        return ResponseEntity.badRequest().body("Não foi possível atualizar o produto");
+    }
+
 }
