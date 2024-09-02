@@ -53,4 +53,18 @@ public class ProductController {
         return ResponseEntity.badRequest().body("Não foi possível atualizar o produto");
     }
 
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity deleteProduct(@PathVariable String id) {
+        Optional<Product> optionalProduct = repository.findById(id);
+
+        if (optionalProduct.isPresent()) {
+            Product product = optionalProduct.get();
+            product.setActive(false);
+
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.badRequest().body("Não foi possível deletar o produto");
+    }
+
 }
