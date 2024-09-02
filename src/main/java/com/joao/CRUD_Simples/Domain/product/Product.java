@@ -21,6 +21,7 @@ public class Product {
     private String supplier;
     private Date dt_validity;
     private Date dt_manufacture;
+    private int amount;
     private boolean active;
 
 }
