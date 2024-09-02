@@ -30,7 +30,7 @@ public class ProductController {
     public ResponseEntity registerProduct(@RequestBody ProductPostDTO data) throws ParseException {
         Product newProduct = new Product(data);
         repository.save(newProduct);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(data);
     }
 
     @PutMapping
