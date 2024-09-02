@@ -26,7 +26,7 @@ public class Product {
     private int amount;
     private boolean active;
 
-    public Product(ProductDTO data) throws ParseException {
+    public Product(ProductPostDTO data) throws ParseException {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
         this.name = data.name();
