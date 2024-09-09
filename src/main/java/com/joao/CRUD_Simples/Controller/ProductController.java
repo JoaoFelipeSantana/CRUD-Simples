@@ -27,6 +27,19 @@ public class ProductController {
         return ResponseEntity.ok(allProducts);
     }
 
+    @GetMapping("/{id}")
+    @Transactional
+    public ResponseEntity getOneProduct(@PathVariable String id) {
+        Optional<Product> optionalProduct = repository.findById(id);
+
+        if (optionalProduct.isPresent()) {
+            Product product = optionalProduct.get();
+            return  ResponseEntity.ok(product);
+        }
+        throw new EntityNotFoundException();
+    }
+
+
     @PostMapping
     public ResponseEntity registerProduct(@RequestBody ProductPostDTO data) throws ParseException {
         Product newProduct = new Product(data);
