@@ -1,7 +1,11 @@
-<h1 align="center" style="font-weight: bold;">CRUD - Simples 💻</h1>
+<h1 align="center" style="font-weight: bold;">CRUD-Simples_Backend 💻</h1>
 
 <p align="center">
-    <b>Projeto visa efetuar um CRUD simples utilizando o Framework Spring para prática.</b>
+    <b>Projeto visa efetuar um CRUD simples utilizando o Framework Spring para prática. Não contém regras de negócio, validações e etc, realizando somente a comunicação de um Frontend com uma API</b>
+</p>
+
+<p align="center">
+     <a href="https://github.com/JoaoFelipeSantana/CRUD-Simples_Frontend">📱Repositório da interface para consumir a API</a>
 </p>
 
 <h2 id="technologies">💻 Tecnologias</h2>
